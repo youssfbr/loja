@@ -1,18 +1,17 @@
-import { NavComponent } from './shared/component/nav/nav.component';
 import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  template: `
-    <!--The content below is only a placeholder and can be replaced.-->
+  template: `   
 
     <app-nav></app-nav>
 
-    <div class="container text-center">
-      <h2>Alisson </h2>
-    </div>    
+    <app-home></app-home>    
     
     <router-outlet></router-outlet>
+    
+    <app-footer></app-footer>
+
   `,
   styles: []
 })
