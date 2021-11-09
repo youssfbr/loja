@@ -1,7 +1,7 @@
 package com.github.youssfbr.loja.resources.exceptions;
 
+import com.github.youssfbr.loja.services.exceptions.DatabaseException;
 import com.github.youssfbr.loja.services.exceptions.ResourceNotFoundException;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -15,13 +15,22 @@ public class ResourceExceptionHandler {
     @ExceptionHandler(ResourceNotFoundException.class)
     ResponseEntity<StandardError> resourceNotFound(ResourceNotFoundException e, HttpServletRequest request) {
 
-        HttpStatus httpStatus = HttpStatus.NOT_FOUND;
+        StandardError err = new StandardError();
+        err.setTimestamp(Instant.now());
+        err.setStatus(e.getHttpStatus().value());
+        err.setError(e.getMessage());
+        err.setPath(request.getRequestURI());
+        return ResponseEntity.status(e.getHttpStatus()).body(err);
+    }
+
+    @ExceptionHandler(DatabaseException.class)
+    ResponseEntity<StandardError> database(DatabaseException e, HttpServletRequest request) {
 
         StandardError err = new StandardError();
         err.setTimestamp(Instant.now());
-        err.setStatus(httpStatus.value());
+        err.setStatus(e.getHttpStatus().value());
         err.setError(e.getMessage());
         err.setPath(request.getRequestURI());
-        return ResponseEntity.status(httpStatus).body(err);
+        return ResponseEntity.status(e.getHttpStatus()).body(err);
     }
 }
