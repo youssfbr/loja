@@ -43,4 +43,15 @@ public class CategoryService implements ICategoryService{
 
         return new CategoryDTO(entity);
     }
+
+    @Override
+    @Transactional
+    public CategoryDTO update(Long id, CategoryDTO dto) {
+
+        Category entity = categoryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Recurso com id: " + id + " não encontrado."));
+        entity.setName(dto.getName());
+        entity = categoryRepository.save(entity);
+        
+        return new CategoryDTO(entity);
+    }
 }
