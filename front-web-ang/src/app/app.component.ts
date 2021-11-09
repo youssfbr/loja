@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
     
     <app-nav></app-nav>
 
-    <div class="container">
+    <div class="">
       <router-outlet></router-outlet>    
     </div>
 
