@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,6 +30,17 @@ public class CategoryService implements ICategoryService{
     @Transactional(readOnly = true)
     public CategoryDTO findById(final Long id) {
         Category entity = categoryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Recurso com id: " + id + " não encontrado."));
+        return new CategoryDTO(entity);
+    }
+
+    @Override
+    @Transactional
+    public CategoryDTO insert(CategoryDTO dto) {
+
+        Category entity = new Category();
+        entity.setName(dto.getName());
+        entity = categoryRepository.save(entity);
+
         return new CategoryDTO(entity);
     }
 }
