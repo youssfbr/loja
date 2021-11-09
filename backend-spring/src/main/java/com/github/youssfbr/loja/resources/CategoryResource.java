@@ -1,5 +1,6 @@
 package com.github.youssfbr.loja.resources;
 
+import com.github.youssfbr.loja.dto.CategoryDTO;
 import com.github.youssfbr.loja.entities.Category;
 import com.github.youssfbr.loja.services.CategoryService;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,7 @@ public class CategoryResource {
     }
 
     @GetMapping
-    public ResponseEntity<List<Category>> findAll() {
+    public ResponseEntity<List<CategoryDTO>> findAll() {
         return ResponseEntity.ok(categoryService.findAll());
     }
 }
