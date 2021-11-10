@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.Instant;
 
 @Entity
@@ -12,7 +13,8 @@ import java.time.Instant;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Category {
+public class Category implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @EqualsAndHashCode.Include
