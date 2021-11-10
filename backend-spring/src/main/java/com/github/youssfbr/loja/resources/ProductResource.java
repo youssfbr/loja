@@ -15,31 +15,31 @@ import java.util.List;
 @RequestMapping("/products")
 public class ProductResource {
 
-    private final ProductService ProductService;
+    private final ProductService productService;
 
-    public ProductResource(final ProductService ProductService) {
-        this.ProductService = ProductService;
+    public ProductResource(final ProductService productService) {
+        this.productService = productService;
     }
 
     @GetMapping
     public ResponseEntity<List<ProductDTO>> findAll() {
-        return ResponseEntity.ok(ProductService.findAll());
+        return ResponseEntity.ok(productService.findAll());
     }
 
     @GetMapping("/paged")
     public ResponseEntity<Page<ProductDTO>> findAllPages(Pageable pageable) {
-        return ResponseEntity.ok(ProductService.findAllPaged(pageable));
+        return ResponseEntity.ok(productService.findAllPaged(pageable));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ProductDTO> findById(final @PathVariable Long id) {
-        return ResponseEntity.ok(ProductService.findById(id));
+        return ResponseEntity.ok(productService.findById(id));
     }
 
     @PostMapping
     public ResponseEntity<ProductDTO> insert(@RequestBody ProductDTO dto) {
 
-        dto = ProductService.insert(dto);
+        dto = productService.insert(dto);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(dto.getId()).toUri();
@@ -50,7 +50,7 @@ public class ProductResource {
     @PutMapping("/{id}")
     public ResponseEntity<ProductDTO> update(@PathVariable Long id, @RequestBody ProductDTO dto) {
 
-        dto = ProductService.update(id, dto);
+        dto = productService.update(id, dto);
 
         return ResponseEntity.ok(dto);
     }
@@ -58,7 +58,7 @@ public class ProductResource {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> update(@PathVariable Long id) {
 
-        ProductService.delete(id);
+        productService.delete(id);
 
         return ResponseEntity.noContent().build();
     }

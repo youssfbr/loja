@@ -21,6 +21,8 @@ public class CategoryService implements ICategoryService{
 
     private final ICategoryRepository categoryRepository;
 
+    private static final String MESSAGE_ID = "Recurso não encontrado. Id: ";
+
     public CategoryService(final ICategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
     }
@@ -42,7 +44,7 @@ public class CategoryService implements ICategoryService{
     @Override
     @Transactional(readOnly = true)
     public CategoryDTO findById(final Long id) {
-        Category entity = categoryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Recurso com id: " + id + " não encontrado.", HttpStatus.NOT_FOUND));
+        Category entity = categoryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(MESSAGE_ID + id, HttpStatus.NOT_FOUND));
         return new CategoryDTO(entity);
     }
 
@@ -61,7 +63,7 @@ public class CategoryService implements ICategoryService{
     @Transactional
     public CategoryDTO update(Long id, CategoryDTO dto) {
 
-        Category entity = categoryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Recurso com id: " + id + " não encontrado.", HttpStatus.NOT_FOUND));
+        Category entity = categoryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(MESSAGE_ID, HttpStatus.NOT_FOUND));
 
         entity.setName(dto.getName());
         entity = categoryRepository.save(entity);
@@ -75,7 +77,7 @@ public class CategoryService implements ICategoryService{
             categoryRepository.deleteById(id);
         }
         catch (EmptyResultDataAccessException e) {
-            throw new ResourceNotFoundException("Recurso com id: " + id + " não encontrado.", HttpStatus.NOT_FOUND);
+            throw new ResourceNotFoundException(MESSAGE_ID, HttpStatus.NOT_FOUND);
         }
         catch (DataIntegrityViolationException e) {
             throw new DatabaseException("Recurso não deletado. Violação de integidade",
