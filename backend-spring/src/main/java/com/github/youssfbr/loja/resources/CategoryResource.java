@@ -2,6 +2,8 @@ package com.github.youssfbr.loja.resources;
 
 import com.github.youssfbr.loja.dto.CategoryDTO;
 import com.github.youssfbr.loja.services.CategoryService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -22,6 +24,11 @@ public class CategoryResource {
     @GetMapping
     public ResponseEntity<List<CategoryDTO>> findAll() {
         return ResponseEntity.ok(categoryService.findAll());
+    }
+
+    @GetMapping("/paged")
+    public ResponseEntity<Page<CategoryDTO>> findAllPages(Pageable pageable) {
+        return ResponseEntity.ok(categoryService.findAllPaged(pageable));
     }
 
     @GetMapping("/{id}")
