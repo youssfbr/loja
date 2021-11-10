@@ -34,8 +34,9 @@ public class Product implements Serializable {
     @NonNull@Setter
     private Double price;
 
+    @Column(name = "promotion")
     @NonNull@Setter
-    private boolean promotion;
+    private boolean isPromotion;
 
     @NonNull@Setter
     private Double promotionPrice;
