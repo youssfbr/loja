@@ -115,7 +115,7 @@ public class ProductService implements IProductService{
         entity.setPromotion(validateDto(dto.isPromotion()) ? dto.isPromotion() : entity.isPromotion());
         entity.setPromotionPrice(validateDto(dto.getPromotionPrice()) ? dto.getPromotionPrice() : entity.getPromotionPrice());
         entity.setImgUrl(validateDto(dto.getImgUrl()) ? dto.getImgUrl() : entity.getImgUrl());
-        entity.setDate(validateDto(dto.getDate()) ? dto.getDate() : entity.getDate());
+       // entity.setDate(validateDto(dto.getDate()) ? dto.getDate() : entity.getDate());
 
         entity.getCategories().clear();
 

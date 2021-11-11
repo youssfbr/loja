@@ -5,7 +5,7 @@ import com.github.youssfbr.loja.entities.Product;
 import lombok.*;
 
 import java.io.Serializable;
-import java.time.Instant;
+//import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -18,24 +18,24 @@ public class ProductDTO implements Serializable {
 
     private Long id;
     private String name;
-    private String description;
     private Double price;
-    private boolean isPromotion;
+    private boolean promotion;
     private Double promotionPrice;
     private String imgUrl;
-    private Instant date;
+    //private Instant date;
+    private String description;
 
     private List<CategoryDTO> categories = new ArrayList<>();
 
     public ProductDTO(Product entity) {
         id = entity.getId();
         name = entity.getName();
-        description = entity.getDescription();
         price = entity.getPrice();
-        isPromotion = entity.isPromotion();
+        promotion = entity.isPromotion();
         promotionPrice = entity.getPromotionPrice();
         imgUrl = entity.getImgUrl();
-        date = entity.getDate();
+        //date = entity.getDate();
+        description = entity.getDescription();
     }
 
     public ProductDTO(Product entity, Set<Category> categories) {

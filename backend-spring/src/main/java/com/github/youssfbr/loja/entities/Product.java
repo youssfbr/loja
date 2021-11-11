@@ -21,22 +21,16 @@ public class Product implements Serializable {
     @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NonNull
     private Long id;
 
     @NonNull@Setter
     private String name;
 
-    @Column(columnDefinition = "TEXT")
-    @NonNull@Setter
-    private String description;
-
     @NonNull@Setter
     private Double price;
 
-    @Column(name = "promotion")
     @NonNull@Setter
-    private boolean isPromotion;
+    private boolean promotion;
 
     @Setter
     private Double promotionPrice;
@@ -45,8 +39,11 @@ public class Product implements Serializable {
     private String imgUrl;
 
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
-    @NonNull@Setter
     private Instant date;
+
+    @Column(columnDefinition = "TEXT")
+    @NonNull@Setter
+    private String description;
 
     @ManyToMany
     @JoinTable(

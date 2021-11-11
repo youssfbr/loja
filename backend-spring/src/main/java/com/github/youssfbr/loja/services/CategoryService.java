@@ -63,7 +63,7 @@ public class CategoryService implements ICategoryService{
     @Transactional
     public CategoryDTO update(Long id, CategoryDTO dto) {
 
-        Category entity = categoryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(MESSAGE_ID, HttpStatus.NOT_FOUND));
+        Category entity = categoryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(MESSAGE_ID + id, HttpStatus.NOT_FOUND));
 
         entity.setName(dto.getName());
         entity = categoryRepository.save(entity);
@@ -77,7 +77,7 @@ public class CategoryService implements ICategoryService{
             categoryRepository.deleteById(id);
         }
         catch (EmptyResultDataAccessException e) {
-            throw new ResourceNotFoundException(MESSAGE_ID, HttpStatus.NOT_FOUND);
+            throw new ResourceNotFoundException(MESSAGE_ID + id, HttpStatus.NOT_FOUND);
         }
         catch (DataIntegrityViolationException e) {
             throw new DatabaseException("Recurso não deletado. Violação de integidade",
