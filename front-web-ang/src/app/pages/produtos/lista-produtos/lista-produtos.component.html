@@ -1,0 +1,45 @@
+<div class=" main-container mt-4">
+
+    <main>
+        <div  class="row row-cols-1 row-cols-md-3 mb-5 text-center">
+        
+          <div class="col " *ngFor="let product of products" >
+            <div class="card mb-4 rounded-3 shadow-sm" >
+              <div class="card-header py-3">
+                <h4 class="my-0 fw-normal">{{ product.name | titlecase }}</h4>
+              </div>
+              <div class="card-body">
+                <a class="text-decoration-none" [routerLink]="['/produto-detalhe', product.id]">
+                    <div style="align-content:center;">
+                        <img src="/assets/img/{{ product.imgUrl }}" height="150px" width="150px" alt="">
+                    </div>
+                </a>
+                
+                <div *ngIf="product.promotion">                    
+                    <ul class="list-unstyled mt-3 mb-4 mt-4">      
+                        <li>PROMOÇÃO!</li>           
+                        <li><small><del>De: {{ product.price | currency }}</del></small></li>
+                        <li><h2 class="card-title pricing-card-title"><small>Por:</small>  {{ product.promotionPrice | currency }}</h2></li>                        
+                      </ul>
+                </div>
+                <div  *ngIf="!product.promotion">
+                    <ul class="list-unstyled mt-3 mb-5">                 
+                      <li>Por apenas</li>
+                      <li><h1 class="card-title pricing-card-title">{{ product.price | currency }}</h1></li>
+                    </ul>
+
+                </div>
+
+                
+                <a class="w-100 btn btn-lg btn-primary" [routerLink]="['/carrinho', product.id]">
+                    <span class="fa fa-shopping-cart me-3"></span>Comprar
+                </a>
+              </div>
+             
+            </div>
+          </div>          
+          
+        </div>
+    </main>
+
+</div>
