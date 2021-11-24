@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-cadastro',
@@ -7,9 +8,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CadastroComponent implements OnInit {
 
-  constructor() { }
+  cadastroForm: FormGroup;
 
-  ngOnInit(): void {
+  constructor(private fb: FormBuilder) 
+  {
+    this.cadastroForm = this.fb.group({
+      name: ['', []],
+      cpf: ['', []],
+      email: ['', []],
+      password: ['', []],
+      confirmepassword: ['', []]      
+    });
+   }
+
+  ngOnInit(): void {    
+  }
+
+  userPersist(): void {
+    let x = this.cadastroForm.value;
+
   }
 
 }
