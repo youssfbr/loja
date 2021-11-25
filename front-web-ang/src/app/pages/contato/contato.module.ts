@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { TextMaskModule } from '@myndmanagement/text-mask';
+
 import { ContatoComponent } from './contato.component';
 import { CadastroComponent } from './cadastro/cadastro.component';
 
@@ -12,7 +14,8 @@ import { CadastroComponent } from './cadastro/cadastro.component';
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TextMaskModule,    
   ], 
   exports: [
     ContatoComponent,

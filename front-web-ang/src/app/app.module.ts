@@ -17,6 +17,8 @@ import { ContatoModule } from './pages/contato/contato.module';
 import { registerLocaleData } from '@angular/common';
 import ptBr from '@angular/common/locales/pt';
 
+import { CustomFormsModule } from 'ng2-validation'
+
 registerLocaleData(ptBr);
 
 @NgModule({
@@ -35,7 +37,8 @@ registerLocaleData(ptBr);
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ContatoModule
+    ContatoModule,  
+    CustomFormsModule 
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'pt' },
